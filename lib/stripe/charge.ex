@@ -85,6 +85,6 @@ defmodule Stripe.Charge do
   @spec retrieve(binary, Keyword.t) :: {:ok, t} | {:error, Stripe.api_error_struct}
   def retrieve(id, opts \\ []) do
     endpoint = @plural_endpoint <> "/" <> id
-    Stripe.Request.retrieve(endpoint, __MODULE__, opts)
+    Stripe.Request.retrieve(endpoint, opts)
   end
 end

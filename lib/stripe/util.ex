@@ -39,14 +39,6 @@ defmodule Stripe.Util do
     |> Enum.into(%{})
   end
 
-  def string_map_to_atoms([string_key_map]) do
-    string_map_to_atoms string_key_map
-  end
-
-  def string_map_to_atoms(string_key_map) do
-    for {key, val} <- string_key_map, into: %{}, do: {String.to_atom(key), val}
-  end
-
   def atomize_keys(map = %{}) do
     map
     |> Enum.map(fn {k, v} -> {atomize_key(k), atomize_keys(v)} end)
