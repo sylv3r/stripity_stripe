@@ -5,6 +5,7 @@ defmodule Stripe.Token do
   You can:
 
   - Create a token for a Connect customer with a card
+  - Create a token with all options - Only for Unit Tests with Stripe
   - Retrieve a token
 
   Does not yet render lists or take options.
@@ -65,6 +66,21 @@ defmodule Stripe.Token do
       customer: customer_id
     }
     Stripe.Request.create(@plural_endpoint, body, @schema, __MODULE__, opts)
+  end
+
+  @doc """
+  Create a token.
+
+  WARNING : This function is mainly for testing purposes only, do not use
+  in production, use the Stripe.js library on the client device instead.
+
+  You MUST pass in your Publishable Key in `opts` :
+
+      Stripe.Token.create_unsecure(%{card: card_map}, api_key: "STRIPE_PUBLISHABLE_KEY")
+  """
+  @spec create_unsecure(map, Keyword.t) :: {:ok, t} | {:error, Stripe.api_error_struct}
+  def create_unsecure(changes, opts \\ []) do
+    Stripe.Request.create(@plural_endpoint, changes, @schema, __MODULE__, opts)
   end
 
   @doc """
